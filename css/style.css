@@ -306,7 +306,7 @@ header.scrolled nav{padding:12px 0;}
   .section-head{ margin-bottom:36px; }
   .tag{
     display:inline-block;
-    font-size:11px;
+    font-size:14px;
     letter-spacing:.2em;
     text-transform:uppercase;
     color:var(--amber);

@@ -134,6 +134,106 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleHeader();
     window.addEventListener('scroll', toggleHeader, { passive: true });
   }
+
+  /* ---------------------------------------------------------
+     6. Service detail modal (Layanan section demo cards)
+     --------------------------------------------------------- */
+  const serviceData = {
+    1: {
+      idx: '01. INSTALASI',
+      title: 'Genset & Panel',
+      desc: 'Pemasangan power house, unit genset, panel, kabel, sistem kontrol, exhaust dan fuel piping — dikerjakan sesuai spesifikasi dan standar keselamatan proyek.',
+      images: ['images/svc1.jpg', 'images/svc1-b.jpg', 'images/svc1-c.jpg'],
+    },
+    2: {
+      idx: '02. CONTROL',
+      title: 'Panel ATS/AMF',
+      desc: 'Instalasi panel ATS/AMF dan Auto Synchrone untuk kebutuhan paralel unit, lengkap dengan wiring dan pengujian sistem kontrol.',
+      images: ['images/svc2.jpg', 'images/svc2-b.jpg', 'images/svc2-c.jpg'],
+    },
+    3: {
+      idx: '03. REPAIR',
+      title: 'Overhaul',
+      desc: 'Perbaikan engine, generator, panel dan instalasi kabel sesuai spesifikasi unit — dikerjakan tenaga terlatih dari pembongkaran sampai pengujian ulang.',
+      images: ['images/svc3.jpg', 'images/svc3-b.jpg', 'images/svc3-c.jpg'],
+    },
+    4: {
+      idx: '04. MAINTENANCE',
+      title: 'Preventive Check',
+      desc: 'Service rutin, setting & adjusting, dan deteksi dini gejala kerusakan unit sebelum berkembang jadi breakdown.',
+      images: ['images/svc4.jpg', 'images/svc4-b.jpg', 'images/svc4-c.jpg'],
+    },
+    5: {
+      idx: '05. SUPPLIER',
+      title: 'Spare Part & Consumable',
+      desc: 'Pengadaan spare part asli, unit pengganti sementara, engine oil dan consumable goods lainnya.',
+      images: ['images/svc5.jpg', 'images/svc5-b.jpg', 'images/svc5-c.jpg'],
+    },
+  };
+
+  const modal = document.getElementById('serviceModal');
+  if (modal) {
+    const heroImg = document.getElementById('modalHeroImg');
+    const thumbsWrap = document.getElementById('modalThumbs');
+    const idxEl = document.getElementById('modalIdx');
+    const titleEl = document.getElementById('modalTitle');
+    const descEl = document.getElementById('modalDesc');
+    const closeBtn = document.getElementById('modalClose');
+    let lastFocused = null;
+
+    function openModal(serviceId) {
+      const data = serviceData[serviceId];
+      if (!data) return;
+      idxEl.textContent = data.idx;
+      titleEl.textContent = data.title;
+      descEl.textContent = data.desc;
+      heroImg.src = data.images[0];
+      heroImg.alt = data.title;
+
+      thumbsWrap.innerHTML = '';
+      data.images.forEach((src, i) => {
+        const t = document.createElement('img');
+        t.src = src;
+        t.alt = data.title + ' - foto ' + (i + 1);
+        if (i === 0) t.classList.add('active');
+        t.addEventListener('click', () => {
+          heroImg.src = src;
+          thumbsWrap.querySelectorAll('img').forEach((el) => el.classList.remove('active'));
+          t.classList.add('active');
+        });
+        thumbsWrap.appendChild(t);
+      });
+
+      lastFocused = document.activeElement;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.demo-card[data-service]').forEach((card) => {
+      card.addEventListener('click', () => openModal(card.dataset.service));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(card.dataset.service);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  }
 });
 
 // Partners
