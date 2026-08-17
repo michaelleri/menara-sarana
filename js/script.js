@@ -135,3 +135,58 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', toggleHeader, { passive: true });
   }
 });
+
+// Partners
+  // gandakan isi track supaya scroll infinite mulus
+  const track = document.getElementById('track');
+  track.innerHTML += track.innerHTML;
+// Partners
+
+// Layanan
+const backdrop = document.getElementById('modalBackdrop');
+  const heroImg = document.getElementById('modalHeroImg');
+  const thumbsWrap = document.getElementById('modalThumbs');
+  const idxEl = document.getElementById('modalIdx');
+  const titleEl = document.getElementById('modalTitle');
+  const descEl = document.getElementById('modalDesc');
+ 
+  function openModal(card){
+    const images = card.dataset.images.split(',').map(s => s.trim());
+    idxEl.textContent = card.dataset.idx;
+    titleEl.innerHTML = card.dataset.title;
+    descEl.textContent = card.dataset.desc;
+ 
+    heroImg.src = images[0];
+    heroImg.alt = card.dataset.title;
+ 
+    thumbsWrap.innerHTML = '';
+    images.forEach((src, i) => {
+      const t = document.createElement('img');
+      t.src = src;
+      t.className = i === 0 ? 'active' : '';
+      t.addEventListener('click', () => {
+        heroImg.src = src;
+        thumbsWrap.querySelectorAll('img').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+      });
+      thumbsWrap.appendChild(t);
+    });
+ 
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+ 
+  function closeModal(){
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+ 
+  document.querySelectorAll('.demo-card').forEach(card => {
+    card.addEventListener('click', () => openModal(card));
+  });
+ 
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Layanan
