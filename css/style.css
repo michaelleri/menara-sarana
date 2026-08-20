@@ -28,17 +28,138 @@
   .btn-primary:hover{background:var(--maroon-dark);}
   .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
   .btn-ghost:hover{border-color:var(--navy);color:var(--navy);}
-
+ 
   header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
-  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
-  .logo{display:flex;align-items:center;gap:10px;}
+  nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;}
+  .logo{display:flex;align-items:center;gap:10px;min-width:0;}
   .logo-mark{width:36px;height:36px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:13px;color:#fff;}
   .logo-mark-img{width:40px;height:40px;object-fit:contain;flex:none;}
-  .logo-text{font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:0.01em;color:var(--ink);}
-  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--ink-soft);text-transform:uppercase;font-weight:500;margin-top:2px;}
-  .nav-links{display:flex;gap:34px;font-size:14px;color:var(--ink-soft);}
+  .logo-text{font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:0.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--ink-soft);text-transform:uppercase;font-weight:500;margin-top:2px;white-space:normal;}
+  .nav-links{display:flex;align-items:center;gap:34px;font-size:14px;color:var(--ink-soft);}
   .nav-links a:hover{color:var(--maroon);}
+ 
+  /* ====== TAMBAHAN: hamburger + drawer mobile ====== */
+  .nav-toggle{
+    display:none;
+    width:38px;height:38px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+    align-items:center;justify-content:center;
+    flex:none;
+  }
+  .nav-toggle{ position:relative; }
+  .nav-toggle span,
+  .nav-toggle::before,
+  .nav-toggle::after{
+    content:"";
+    position:absolute;
+    left:10px;
+    width:18px;height:2px;
+    border-radius:2px;
+    background:var(--ink);
+    transition:transform .25s ease, opacity .2s ease, top .25s ease;
+  }
+  .nav-toggle::before{ top:13px; }
+  .nav-toggle span{ top:18px; }
+  .nav-toggle::after{ top:23px; }
+ 
+  /* jadi ikon close (X) saat drawer aktif */
+  header.open .nav-toggle::before{ top:18px; transform:rotate(45deg); background:var(--maroon); }
+  header.open .nav-toggle::after{ top:18px; transform:rotate(-45deg); background:var(--maroon); }
+  header.open .nav-toggle span{ opacity:0; }
+ 
+  .nav-links .btn-mobile-only{ display:none; }
+  .nav-close{ display:none; }
+ 
+  @media (max-width:840px){
+    .nav-toggle{ display:flex; }
+ 
+    /* tombol CTA di navbar disembunyikan, dipindah ke dalam drawer */
+    nav > .btn-primary{ display:none; }
+ 
+    .nav-links{
+      position:fixed;
+      top:0;right:0;
+      height:100vh;
+      width:min(80vw, 320px);
+      background:var(--cream);
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      padding:90px 28px 32px;
+      border-left:1px solid var(--line);
+      transform:translateX(100%);
+      transition:transform .3s ease;
+      z-index:49;
+      overflow-y:auto;
+    }
+    header.open .nav-links{ transform:translateX(0); }
+ 
+    .nav-links a{
+      display:block;
+      padding:16px 0;
+      font-size:16px;
+      border-bottom:1px solid var(--line);
+    }
+ 
+    .nav-close{
+      display:flex;
+      align-items:center;justify-content:center;
+      position:relative;
+      width:34px;height:34px;
+      margin:0 0 20px auto;
+      border:1px solid var(--line);
+      border-radius:50%;
+      background:transparent;
+      cursor:pointer;
+      padding:0;
+      flex:none;
+    }
+    .nav-close span,
+    .nav-close::before,
+    .nav-close::after{
+      content:"";
+      position:absolute;
+      width:14px;height:2px;
+      border-radius:2px;
+      background:var(--ink);
+    }
+    .nav-close::before{ transform:rotate(45deg); }
+    .nav-close::after{ transform:rotate(-45deg); }
+    .nav-close span{ display:none; }
+    .nav-close:hover::before,
+    .nav-close:hover::after{ background:var(--maroon); }
+ 
+    .nav-links .btn-mobile-only{
+      display:inline-flex;
+      justify-content:center;
+      margin-top:20px;
+      border-bottom:none;
+    }
+ 
+    .nav-backdrop{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.35);
+      z-index:48;
+      opacity:0;pointer-events:none;
+      transition:opacity .25s ease;
+    }
+    header.open .nav-backdrop{ opacity:1;pointer-events:auto; }
+  }
+ 
+  @media (max-width:480px){
+    .logo-text{ font-size:13px; max-width:150px; }
+    .logo-text span{ font-size:8px; }
+  }
+ 
+  /* konten dummy biar sticky-nya kelihatan saat discroll */
+  main .wrap{ padding-top:60px; padding-bottom:500px; color:var(--ink-soft); }
 
+  /* / * ====== HERO SECTION ====== */ 
   .hero{background:var(--panel);position:relative;padding:88px 0;overflow:hidden;}
   .hero .wrap{display:grid;grid-template-columns:1fr 0.95fr;gap:48px;align-items:center;}
   .hero h1{font-size:46px;margin-top:16px;color:var(--ink);}

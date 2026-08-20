@@ -1,13 +1,46 @@
-/* =========================================================
-   PT. Menara Sarana Tama — site interactions & animations
-   Scroll reveal, animated counters, parallax hero, 3D tilt.
-   All motion is skipped automatically if the visitor has
-   "prefers-reduced-motion: reduce" set in their OS/browser.
-   ========================================================= */
+// /* =========================================================
+//    PT. Menara Sarana Tama — site interactions & animations
+//    Scroll reveal, animated counters, parallax hero, 3D tilt.
+//    All motion is skipped automatically if the visitor has
+//    "prefers-reduced-motion: reduce" set in their OS/browser.
+//    ========================================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------------------------------------------------------
+      0. Humburger menu toggle
+     --------------------------------------------------------- */
+  //   document.addEventListener('DOMContentLoaded', function(){
+  //   const header = document.getElementById('siteHeader');
+  //   const toggle = document.getElementById('navToggle');
+  //   const backdrop = document.getElementById('navBackdrop');
+  //   const navClose = document.getElementById('navClose');
+  //   const links = document.querySelectorAll('#navLinks a');
+  
+  //   if(!header || !toggle || !backdrop){
+  //     console.error('Menu error: cek apakah id="siteHeader", id="navToggle", id="navBackdrop" sudah ada di HTML.');
+  //     return;
+  //   }
+  
+  //   function closeMenu(){
+  //     header.classList.remove('open');
+  //     toggle.setAttribute('aria-expanded', 'false');
+  //     toggle.setAttribute('aria-label', 'Buka menu');
+  //   }
+  //   function toggleMenu(){
+  //     const isOpen = header.classList.toggle('open');
+  //     toggle.setAttribute('aria-expanded', String(isOpen));
+  //     toggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+  //   }
+  
+  //   toggle.addEventListener('click', toggleMenu);
+  //   if(navClose) navClose.addEventListener('click', closeMenu);
+  //   backdrop.addEventListener('click', closeMenu);
+  //   links.forEach(a => a.addEventListener('click', closeMenu));
+  //   window.addEventListener('resize', () => { if (window.innerWidth > 840) closeMenu(); });
+  // });
+ 
   /* ---------------------------------------------------------
      1. Scroll reveal — fade + rise, staggered inside groups
      --------------------------------------------------------- */
@@ -234,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
   }
-});
+}};
 
 // Partners
   // gandakan isi track supaya scroll infinite mulus

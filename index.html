@@ -11,23 +11,35 @@
 </head>
 <body>
 
-<header>
+<header id="siteHeader">
   <div class="wrap">
     <nav>
       <a class="logo" href="#top" aria-label="PT Menara Sarana Tama, beranda">
         <img class="logo-mark-img" src="images/logo-icon.png" alt="Logo PT Menara Sarana Tama">
         <span class="logo-text">Menara Sarana Tama<span>Genset &amp; Material Handling</span></span>
       </a>
-      <div class="nav-links">
+ 
+      <div class="nav-links" id="navLinks">
+        <button class="nav-close" id="navClose" aria-label="Tutup menu">
+          <span></span>
+        </button>
         <a href="#profil">Profil</a>
         <a href="about.html">About</a>
         <a href="#layanan">Layanan</a>
         <a href="#proyek">Proyek</a>
         <a href="kontak.html">Kontak</a>
+        <a class="btn btn-primary btn-mobile-only" href="https://wa.me/6281283904127?text=Halo%20MST%2C%20saya%20ingin%20menanyakan%20layanan%20genset">Minta Penawaran</a>
       </div>
+ 
       <a class="btn btn-primary" href="https://wa.me/6281283904127?text=Halo%20MST%2C%20saya%20ingin%20menanyakan%20layanan%20genset">Minta Penawaran</a>
+ 
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span>
+      </button>
     </nav>
   </div>
+ 
+  <div class="nav-backdrop" id="navBackdrop"></div>
 </header>
 
 <main id="top">
@@ -271,6 +283,37 @@
   </div>
 </footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const header = document.getElementById('siteHeader');
+  const toggle = document.getElementById('navToggle');
+  const backdrop = document.getElementById('navBackdrop');
+  const navClose = document.getElementById('navClose');
+  const links = document.querySelectorAll('#navLinks a');
+ 
+  if(!header || !toggle || !backdrop){
+    console.error('Menu error: cek apakah id="siteHeader", id="navToggle", id="navBackdrop" sudah ada di HTML.');
+    return;
+  }
+ 
+  function closeMenu(){
+    header.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Buka menu');
+  }
+  function toggleMenu(){
+    const isOpen = header.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+  }
+ 
+  toggle.addEventListener('click', toggleMenu);
+  if(navClose) navClose.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+  links.forEach(a => a.addEventListener('click', closeMenu));
+  window.addEventListener('resize', () => { if (window.innerWidth > 840) closeMenu(); });
+});
+</script>
 <script src="js/script.js" defer></script>
 </body>
 </html>
