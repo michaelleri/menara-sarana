@@ -1,46 +1,46 @@
-// /* =========================================================
-//    PT. Menara Sarana Tama — site interactions & animations
-//    Scroll reveal, animated counters, parallax hero, 3D tilt.
-//    All motion is skipped automatically if the visitor has
-//    "prefers-reduced-motion: reduce" set in their OS/browser.
-//    ========================================================= */
+/* =========================================================
+   PT. Menara Sarana Tama — site interactions & animations
+   Scroll reveal, animated counters, parallax hero, 3D tilt,
+   hamburger menu, partners marquee, layanan modal.
+   All motion is skipped automatically if the visitor has
+   "prefers-reduced-motion: reduce" set in their OS/browser.
+   ========================================================= */
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------------------------------------------------------
-      0. Humburger menu toggle
+      0. Hamburger menu toggle
      --------------------------------------------------------- */
-  //   document.addEventListener('DOMContentLoaded', function(){
-  //   const header = document.getElementById('siteHeader');
-  //   const toggle = document.getElementById('navToggle');
-  //   const backdrop = document.getElementById('navBackdrop');
-  //   const navClose = document.getElementById('navClose');
-  //   const links = document.querySelectorAll('#navLinks a');
-  
-  //   if(!header || !toggle || !backdrop){
-  //     console.error('Menu error: cek apakah id="siteHeader", id="navToggle", id="navBackdrop" sudah ada di HTML.');
-  //     return;
-  //   }
-  
-  //   function closeMenu(){
-  //     header.classList.remove('open');
-  //     toggle.setAttribute('aria-expanded', 'false');
-  //     toggle.setAttribute('aria-label', 'Buka menu');
-  //   }
-  //   function toggleMenu(){
-  //     const isOpen = header.classList.toggle('open');
-  //     toggle.setAttribute('aria-expanded', String(isOpen));
-  //     toggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
-  //   }
-  
-  //   toggle.addEventListener('click', toggleMenu);
-  //   if(navClose) navClose.addEventListener('click', closeMenu);
-  //   backdrop.addEventListener('click', closeMenu);
-  //   links.forEach(a => a.addEventListener('click', closeMenu));
-  //   window.addEventListener('resize', () => { if (window.innerWidth > 840) closeMenu(); });
-  // });
- 
+  const header = document.getElementById('siteHeader');
+  const toggle = document.getElementById('navToggle');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const navClose = document.getElementById('navClose');
+  const navLinks = document.querySelectorAll('#navLinks a');
+
+  if (header && toggle && navBackdrop) {
+    function closeMenu() {
+      header.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Buka menu');
+    }
+    function toggleMenu() {
+      const isOpen = header.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+    }
+
+    toggle.addEventListener('click', toggleMenu);
+    if (navClose) navClose.addEventListener('click', closeMenu);
+    navBackdrop.addEventListener('click', closeMenu);
+    navLinks.forEach((a) => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 840) closeMenu();
+    });
+  } else {
+    console.warn('Menu hamburger tidak aktif: cek id="siteHeader", id="navToggle", id="navBackdrop" di HTML.');
+  }
+
   /* ---------------------------------------------------------
      1. Scroll reveal — fade + rise, staggered inside groups
      --------------------------------------------------------- */
@@ -159,167 +159,74 @@
   }
 
   /* ---------------------------------------------------------
-     5. Sticky header — subtle shrink + shadow after scrolling
+     5. Partners marquee — duplicate track content for
+        seamless infinite scroll
      --------------------------------------------------------- */
-  const header = document.querySelector('header');
-  if (header) {
-    const toggleHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
-    toggleHeader();
-    window.addEventListener('scroll', toggleHeader, { passive: true });
+  const track = document.getElementById('track');
+  if (track) {
+    track.innerHTML += track.innerHTML;
   }
 
   /* ---------------------------------------------------------
-     6. Service detail modal (Layanan section demo cards)
+     6. Layanan modal — gallery + description
+        (matches demo-card[data-images] markup in index.html)
      --------------------------------------------------------- */
-  const serviceData = {
-    1: {
-      idx: '01. INSTALASI',
-      title: 'Genset & Panel',
-      desc: 'Pemasangan power house, unit genset, panel, kabel, sistem kontrol, exhaust dan fuel piping — dikerjakan sesuai spesifikasi dan standar keselamatan proyek.',
-      images: ['images/svc1.jpg', 'images/svc1-b.jpg', 'images/svc1-c.jpg'],
-    },
-    2: {
-      idx: '02. CONTROL',
-      title: 'Panel ATS/AMF',
-      desc: 'Instalasi panel ATS/AMF dan Auto Synchrone untuk kebutuhan paralel unit, lengkap dengan wiring dan pengujian sistem kontrol.',
-      images: ['images/svc2.jpg', 'images/svc2-b.jpg', 'images/svc2-c.jpg'],
-    },
-    3: {
-      idx: '03. REPAIR',
-      title: 'Overhaul',
-      desc: 'Perbaikan engine, generator, panel dan instalasi kabel sesuai spesifikasi unit — dikerjakan tenaga terlatih dari pembongkaran sampai pengujian ulang.',
-      images: ['images/svc3.jpg', 'images/svc3-b.jpg', 'images/svc3-c.jpg'],
-    },
-    4: {
-      idx: '04. MAINTENANCE',
-      title: 'Preventive Check',
-      desc: 'Service rutin, setting & adjusting, dan deteksi dini gejala kerusakan unit sebelum berkembang jadi breakdown.',
-      images: ['images/svc4.jpg', 'images/svc4-b.jpg', 'images/svc4-c.jpg'],
-    },
-    5: {
-      idx: '05. SUPPLIER',
-      title: 'Spare Part & Consumable',
-      desc: 'Pengadaan spare part asli, unit pengganti sementara, engine oil dan consumable goods lainnya.',
-      images: ['images/svc5.jpg', 'images/svc5-b.jpg', 'images/svc5-c.jpg'],
-    },
-  };
-
-  const modal = document.getElementById('serviceModal');
-  if (modal) {
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  if (modalBackdrop) {
     const heroImg = document.getElementById('modalHeroImg');
     const thumbsWrap = document.getElementById('modalThumbs');
     const idxEl = document.getElementById('modalIdx');
     const titleEl = document.getElementById('modalTitle');
     const descEl = document.getElementById('modalDesc');
-    const closeBtn = document.getElementById('modalClose');
-    let lastFocused = null;
+    const modalCloseBtn = document.getElementById('modalClose');
 
-    function openModal(serviceId) {
-      const data = serviceData[serviceId];
-      if (!data) return;
-      idxEl.textContent = data.idx;
-      titleEl.textContent = data.title;
-      descEl.textContent = data.desc;
-      heroImg.src = data.images[0];
-      heroImg.alt = data.title;
+    function openServiceModal(card) {
+      const images = (card.dataset.images || '').split(',').map((s) => s.trim()).filter(Boolean);
+      if (idxEl) idxEl.textContent = card.dataset.idx || '';
+      if (titleEl) titleEl.innerHTML = card.dataset.title || '';
+      if (descEl) descEl.textContent = card.dataset.desc || '';
 
-      thumbsWrap.innerHTML = '';
-      data.images.forEach((src, i) => {
-        const t = document.createElement('img');
-        t.src = src;
-        t.alt = data.title + ' - foto ' + (i + 1);
-        if (i === 0) t.classList.add('active');
-        t.addEventListener('click', () => {
-          heroImg.src = src;
-          thumbsWrap.querySelectorAll('img').forEach((el) => el.classList.remove('active'));
-          t.classList.add('active');
+      if (heroImg && images.length) {
+        heroImg.src = images[0];
+        heroImg.alt = card.dataset.title || '';
+      }
+
+      if (thumbsWrap) {
+        thumbsWrap.innerHTML = '';
+        images.forEach((src, i) => {
+          const t = document.createElement('img');
+          t.src = src;
+          t.alt = (card.dataset.title || '') + ' - foto ' + (i + 1);
+          if (i === 0) t.classList.add('active');
+          t.addEventListener('click', () => {
+            heroImg.src = src;
+            thumbsWrap.querySelectorAll('img').forEach((x) => x.classList.remove('active'));
+            t.classList.add('active');
+          });
+          thumbsWrap.appendChild(t);
         });
-        thumbsWrap.appendChild(t);
-      });
+      }
 
-      lastFocused = document.activeElement;
-      modal.classList.add('open');
+      modalBackdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
-      closeBtn.focus();
+      if (modalCloseBtn) modalCloseBtn.focus();
     }
 
-    function closeModal() {
-      modal.classList.remove('open');
+    function closeServiceModal() {
+      modalBackdrop.classList.remove('open');
       document.body.style.overflow = '';
-      if (lastFocused) lastFocused.focus();
     }
 
-    document.querySelectorAll('.demo-card[data-service]').forEach((card) => {
-      card.addEventListener('click', () => openModal(card.dataset.service));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal(card.dataset.service);
-        }
-      });
+    document.querySelectorAll('.demo-card[data-images]').forEach((card) => {
+      card.addEventListener('click', () => openServiceModal(card));
     });
 
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeServiceModal);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeServiceModal();
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeServiceModal();
     });
   }
-}};
-
-// Partners
-  // gandakan isi track supaya scroll infinite mulus
-  const track = document.getElementById('track');
-  track.innerHTML += track.innerHTML;
-// Partners
-
-// Layanan
-const backdrop = document.getElementById('modalBackdrop');
-  const heroImg = document.getElementById('modalHeroImg');
-  const thumbsWrap = document.getElementById('modalThumbs');
-  const idxEl = document.getElementById('modalIdx');
-  const titleEl = document.getElementById('modalTitle');
-  const descEl = document.getElementById('modalDesc');
- 
-  function openModal(card){
-    const images = card.dataset.images.split(',').map(s => s.trim());
-    idxEl.textContent = card.dataset.idx;
-    titleEl.innerHTML = card.dataset.title;
-    descEl.textContent = card.dataset.desc;
- 
-    heroImg.src = images[0];
-    heroImg.alt = card.dataset.title;
- 
-    thumbsWrap.innerHTML = '';
-    images.forEach((src, i) => {
-      const t = document.createElement('img');
-      t.src = src;
-      t.className = i === 0 ? 'active' : '';
-      t.addEventListener('click', () => {
-        heroImg.src = src;
-        thumbsWrap.querySelectorAll('img').forEach(x => x.classList.remove('active'));
-        t.classList.add('active');
-      });
-      thumbsWrap.appendChild(t);
-    });
- 
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
- 
-  function closeModal(){
-    backdrop.classList.remove('open');
-    document.body.style.overflow = '';
-  }
- 
-  document.querySelectorAll('.demo-card').forEach(card => {
-    card.addEventListener('click', () => openModal(card));
-  });
- 
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-  // Layanan
+}); 

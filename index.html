@@ -117,7 +117,7 @@
            data-title="Spare Part &amp; Consumable"
            data-idx="05. SUPPLIER"
            data-desc="Penyediaan spare part dan consumable genset dari berbagai merek, termasuk filter, oli, aki, dan komponen kelistrikan, untuk mendukung kebutuhan perawatan maupun perbaikan unit."
-           data-images="images/svc5.jpg,images/instalation-panel-2.png,image/picture16.png">
+           data-images="images/svc5.jpg,images/instalation-panel-2.png,images/picture16.png">
         <img src="images/svc5.jpg" alt="General supplier spare part">
         <div class="overlay"></div>
         <div class="content"><span class="idx mono">05. SUPPLIER</span><h3>Spare Part &amp; Consumable</h3></div>
@@ -243,9 +243,9 @@
               </div>
             </div>
             <div class="card">
-              <img class="logo-badge" src="images/weichai.png" alt="Wechai">
+              <img class="logo-badge" src="images/weichai.png" alt="Weichai">
               <div class="card-text">
-                  <span class="brand-name">Wechai</span>
+                  <span class="brand-name">Weichai</span>
                   <span class="brand-role">Engine Series</span>
               </div>
             </div>
@@ -283,37 +283,6 @@
   </div>
 </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  const header = document.getElementById('siteHeader');
-  const toggle = document.getElementById('navToggle');
-  const backdrop = document.getElementById('navBackdrop');
-  const navClose = document.getElementById('navClose');
-  const links = document.querySelectorAll('#navLinks a');
- 
-  if(!header || !toggle || !backdrop){
-    console.error('Menu error: cek apakah id="siteHeader", id="navToggle", id="navBackdrop" sudah ada di HTML.');
-    return;
-  }
- 
-  function closeMenu(){
-    header.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Buka menu');
-  }
-  function toggleMenu(){
-    const isOpen = header.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
-  }
- 
-  toggle.addEventListener('click', toggleMenu);
-  if(navClose) navClose.addEventListener('click', closeMenu);
-  backdrop.addEventListener('click', closeMenu);
-  links.forEach(a => a.addEventListener('click', closeMenu));
-  window.addEventListener('resize', () => { if (window.innerWidth > 840) closeMenu(); });
-});
-</script>
 <script src="js/script.js" defer></script>
 </body>
 </html>
