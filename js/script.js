@@ -1,7 +1,11 @@
 /* =========================================================
    PT. Menara Sarana Tama — site interactions & animations
+<<<<<<< HEAD
    Scroll reveal, animated counters, parallax hero, 3D tilt,
    hamburger menu, partners marquee, layanan modal.
+=======
+   Scroll reveal, animated counters, parallax hero, 3D tilt.
+>>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
    All motion is skipped automatically if the visitor has
    "prefers-reduced-motion: reduce" set in their OS/browser.
    ========================================================= */
@@ -10,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------------------------------------------------------
+<<<<<<< HEAD
       0. Hamburger menu toggle
      --------------------------------------------------------- */
   const header = document.getElementById('siteHeader');
@@ -42,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------
+=======
+>>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
      1. Scroll reveal — fade + rise, staggered inside groups
      --------------------------------------------------------- */
   document.querySelectorAll('.reveal-group').forEach((group) => {
@@ -125,16 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
       parallaxImg.style.transform = `translateY(${y * 0.12}px) scale(1.06)`;
       ticking = false;
     };
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(updateParallax);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   /* ---------------------------------------------------------
@@ -168,8 +171,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------
+<<<<<<< HEAD
      6. Layanan modal — gallery + description
         (matches demo-card[data-images] markup in index.html)
+=======
+     5b. Mobile nav — right-side drawer with backdrop
+     --------------------------------------------------------- */
+  const siteHeader = document.getElementById('siteHeader');
+  const navToggle = document.getElementById('navToggle');
+  const navClose = document.getElementById('navClose');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const navLinks = document.getElementById('navLinks');
+
+  if (siteHeader && navToggle && navBackdrop) {
+    const openNav = () => {
+      siteHeader.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeNav = () => {
+      siteHeader.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    navToggle.addEventListener('click', () => {
+      if (siteHeader.classList.contains('open')) closeNav();
+      else openNav();
+    });
+    if (navClose) navClose.addEventListener('click', closeNav);
+    navBackdrop.addEventListener('click', closeNav);
+    if (navLinks) navLinks.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeNav();
+    });
+  }
+
+  /* ---------------------------------------------------------
+     6. Service detail modal (Layanan section demo cards)
+>>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
      --------------------------------------------------------- */
   const modalBackdrop = document.getElementById('modalBackdrop');
   if (modalBackdrop) {
@@ -229,4 +271,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeServiceModal();
     });
   }
+<<<<<<< HEAD
 }); 
+=======
+});
+>>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
