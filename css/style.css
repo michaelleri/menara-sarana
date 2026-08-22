@@ -1,4 +1,5 @@
-:root{
+
+  :root{
     --cream:#FAF7F2;
     --panel:#F1ECE5;
     --panel-2:#FFFFFF;
@@ -27,30 +28,16 @@
   .btn-primary:hover{background:var(--maroon-dark);}
   .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
   .btn-ghost:hover{border-color:var(--navy);color:var(--navy);}
-
+ 
   header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
-  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
-  .logo{display:flex;align-items:center;gap:10px;}
+  nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;}
+  .logo{display:flex;align-items:center;gap:10px;min-width:0;}
   .logo-mark{width:36px;height:36px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:13px;color:#fff;}
   .logo-mark-img{width:40px;height:40px;object-fit:contain;flex:none;}
-  .logo-text{font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:0.01em;color:var(--ink);}
-  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--ink-soft);text-transform:uppercase;font-weight:500;margin-top:2px;}
-  .nav-links{display:flex;gap:34px;font-size:14px;color:var(--ink-soft);}
+  .logo-text{font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:0.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--ink-soft);text-transform:uppercase;font-weight:500;margin-top:2px;white-space:normal;}
+  .nav-links{display:flex;align-items:center;gap:34px;font-size:14px;color:var(--ink-soft);}
   .nav-links a:hover{color:var(--maroon);}
-<<<<<<< HEAD
-
-  /* ====== TAMBAHAN: hamburger + drawer mobile ====== */
-  .nav-toggle{
-    display:none;
-    width:38px;height:38px;
-    border:1px solid var(--line);
-    border-radius:6px;
-    background:transparent;
-    cursor:pointer;
-    padding:0;
-    align-items:center;justify-content:center;
-    flex:none;
-=======
  
    /* ===== Navbar: hamburger + mobile drawer ===== */
   .nav-toggle {
@@ -66,7 +53,6 @@
     background: transparent;
     border: 1px solid var(--line);
     border-radius: 6px;
->>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
   }
 
   .nav-toggle span,
@@ -183,14 +169,10 @@
   }
 
   /* konten dummy biar sticky-nya kelihatan saat discroll */
-<<<<<<< HEAD
-  /* main .wrap{ padding-top:60px; padding-bottom:500px; color:var(--ink-soft); } */
-=======
   main .wrap{ padding-top:60px; padding-bottom:80px; color:var(--ink-soft); }
->>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
 
-  / * ====== HERO SECTION ====== */
-  .hero{background:var(--panel);position:relative;padding:50px 0;overflow:hidden;}
+  /* / * ====== HERO SECTION ====== */ 
+  .hero{background:var(--panel);position:relative;padding:88px 0;overflow:hidden;}
   .hero .wrap{display:grid;grid-template-columns:1fr 0.95fr;gap:48px;align-items:center;}
   .hero h1{font-size:46px;margin-top:16px;color:var(--ink);}
   .hero h1 em{font-style:normal;color:var(--maroon);}
@@ -217,7 +199,7 @@
 
   .partners{
     position:relative;
-    padding:50px 0;
+    padding:88px 0;
     background:var(--panel);
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
@@ -314,11 +296,7 @@
 
 /* END SECTION PARTNERS */
 
-<<<<<<< HEAD
-  section{padding:50px 0;}
-=======
   section{padding:70px 0;}
->>>>>>> 2add57ceb0336d5c58a9d53a3f747771ecb9fd24
   .section-head{max-width:620px;margin-bottom:44px;}
   .section-head h2{font-size:30px;margin-top:10px;color:var(--ink);}
   .section-head p{color:var(--ink-soft);margin-top:14px;font-size:15.5px;}
@@ -582,4 +560,4 @@ header.scrolled nav{padding:12px 0;}
     .modal-hero{ height:220px; }
   }
 
-  /* END Layanan section */ 
+  /* END Layanan section */
