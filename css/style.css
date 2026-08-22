@@ -39,125 +39,137 @@
   .nav-links{display:flex;align-items:center;gap:34px;font-size:14px;color:var(--ink-soft);}
   .nav-links a:hover{color:var(--maroon);}
  
-  /* ====== TAMBAHAN: hamburger + drawer mobile ====== */
-  .nav-toggle{
-    display:none;
-    width:38px;height:38px;
-    border:1px solid var(--line);
-    border-radius:6px;
-    background:transparent;
-    cursor:pointer;
-    padding:0;
-    align-items:center;justify-content:center;
-    flex:none;
+   /* ===== Navbar: hamburger + mobile drawer ===== */
+  .nav-toggle {
+    position: relative;
+    display: none;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 6px;
   }
-  .nav-toggle{ position:relative; }
+
   .nav-toggle span,
   .nav-toggle::before,
-  .nav-toggle::after{
-    content:"";
-    position:absolute;
-    left:10px;
-    width:18px;height:2px;
-    border-radius:2px;
-    background:var(--ink);
-    transition:transform .25s ease, opacity .2s ease, top .25s ease;
+  .nav-toggle::after {
+    position: absolute;
+    left: 10px;
+    width: 18px;
+    height: 2px;
+    content: "";
+    background: var(--ink);
+    border-radius: 2px;
+    transition: top 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
   }
-  .nav-toggle::before{ top:13px; }
-  .nav-toggle span{ top:18px; }
-  .nav-toggle::after{ top:23px; }
- 
-  /* jadi ikon close (X) saat drawer aktif */
-  header.open .nav-toggle::before{ top:18px; transform:rotate(45deg); background:var(--maroon); }
-  header.open .nav-toggle::after{ top:18px; transform:rotate(-45deg); background:var(--maroon); }
-  header.open .nav-toggle span{ opacity:0; }
- 
-  .nav-links .btn-mobile-only{ display:none; }
-  .nav-close{ display:none; }
- 
-  @media (max-width:840px){
-    .nav-toggle{ display:flex; }
- 
-    /* tombol CTA di navbar disembunyikan, dipindah ke dalam drawer */
-    nav > .btn-primary{ display:none; }
- 
-    .nav-links{
-      position:fixed;
-      top:0;right:0;
-      height:100vh;
-      width:min(80vw, 320px);
-      background:var(--cream);
-      flex-direction:column;
-      align-items:stretch;
-      gap:0;
-      padding:90px 28px 32px;
-      border-left:1px solid var(--line);
-      transform:translateX(100%);
-      transition:transform .3s ease;
-      z-index:49;
-      overflow-y:auto;
-    }
-    header.open .nav-links{ transform:translateX(0); }
- 
-    .nav-links a{
-      display:block;
-      padding:16px 0;
-      font-size:16px;
-      border-bottom:1px solid var(--line);
-    }
- 
-    .nav-close{
-      display:flex;
-      align-items:center;justify-content:center;
-      position:relative;
-      width:34px;height:34px;
-      margin:0 0 20px auto;
-      border:1px solid var(--line);
-      border-radius:50%;
-      background:transparent;
-      cursor:pointer;
-      padding:0;
-      flex:none;
-    }
-    .nav-close span,
-    .nav-close::before,
-    .nav-close::after{
-      content:"";
-      position:absolute;
-      width:14px;height:2px;
-      border-radius:2px;
-      background:var(--ink);
-    }
-    .nav-close::before{ transform:rotate(45deg); }
-    .nav-close::after{ transform:rotate(-45deg); }
-    .nav-close span{ display:none; }
-    .nav-close:hover::before,
-    .nav-close:hover::after{ background:var(--maroon); }
- 
-    .nav-links .btn-mobile-only{
-      display:inline-flex;
-      justify-content:center;
-      margin-top:20px;
-      border-bottom:none;
-    }
- 
-    .nav-backdrop{
-      position:fixed;inset:0;
-      background:rgba(0,0,0,.35);
-      z-index:48;
-      opacity:0;pointer-events:none;
-      transition:opacity .25s ease;
-    }
-    header.open .nav-backdrop{ opacity:1;pointer-events:auto; }
+
+  .nav-toggle::before { top: 13px; }
+  .nav-toggle span { top: 18px; }
+  .nav-toggle::after { top: 23px; }
+
+  /* Ikon berubah menjadi X saat menu terbuka */
+  header.open .nav-toggle::before {
+    top: 18px;
+    background: var(--maroon);
+    transform: rotate(45deg);
   }
- 
-  @media (max-width:480px){
-    .logo-text{ font-size:13px; max-width:150px; }
-    .logo-text span{ font-size:8px; }
+
+  header.open .nav-toggle span {
+    opacity: 0;
   }
- 
+
+  header.open .nav-toggle::after {
+    top: 18px;
+    background: var(--maroon);
+    transform: rotate(-45deg);
+  }
+
+  .nav-links .btn-mobile-only {
+    display: none;
+  }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 900px) {
+    nav {
+      position: relative;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+    }
+
+    .nav-cta-desktop {
+      display: none;
+    }
+
+    .nav-links {
+      align-items: flex-start;
+    }
+
+    .nav-links a {
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-links .btn-mobile-only {
+      align-self: flex-start;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      padding: 6px 32px 16px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 12px 20px rgba(43, 37, 33, 0.08);
+      align-items: left;
+    }
+
+    header.open .nav-links {
+      display: flex;
+    }
+
+    .nav-links a {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-links a:last-child {
+      border-bottom: 0;
+    }
+
+    .nav-links .btn-mobile-only {
+      display: inline-flex;
+      justify-content: center;
+      margin-top: 12px;
+      border-bottom: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo-text {
+      max-width: 150px;
+      font-size: 13px;
+    }
+
+    .logo-text span {
+      font-size: 8px;
+    }
+  }
+
   /* konten dummy biar sticky-nya kelihatan saat discroll */
-  main .wrap{ padding-top:60px; padding-bottom:500px; color:var(--ink-soft); }
+  main .wrap{ padding-top:60px; padding-bottom:80px; color:var(--ink-soft); }
 
   /* / * ====== HERO SECTION ====== */ 
   .hero{background:var(--panel);position:relative;padding:88px 0;overflow:hidden;}
@@ -284,7 +296,7 @@
 
 /* END SECTION PARTNERS */
 
-  section{padding:88px 0;}
+  section{padding:70px 0;}
   .section-head{max-width:620px;margin-bottom:44px;}
   .section-head h2{font-size:30px;margin-top:10px;color:var(--ink);}
   .section-head p{color:var(--ink-soft);margin-top:14px;font-size:15.5px;}
@@ -308,7 +320,8 @@
 
   .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
   .project-card{background:var(--navy);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px;position:relative;}
-  .project-card .mono-tag{font-size:10.5px;color:#B9C4CE;letter-spacing:0.1em;font-family:'IBM Plex Mono',monospace;}
+  .project-card img{position:absolute;top:18px;right:18px;height:42px;width:auto;max-width:96px;object-fit:contain;}
+  .project-card .mono-tag{max-width:75%;display:inline-block;}.project-card .mono-tag{font-size:10.5px;color:#B9C4CE;letter-spacing:0.1em;font-family:'IBM Plex Mono',monospace;}
   .project-card .kva{font-family:'Archivo Black',sans-serif;font-size:26px;color:#fff;margin-top:10px;text-transform:none;}
   .project-card .kva span{color:var(--maroon-tint);}
   .project-card .loc{margin-top:14px;font-size:13.5px;color:#C7D0D8;border-top:1px solid rgba(255,255,255,0.14);padding-top:14px;}
@@ -542,7 +555,7 @@ header.scrolled nav{padding:12px 0;}
   .modal-body p{ font-size:14.5px; line-height:1.7; color:var(--panel); margin:0; }
  
   @media (max-width:640px){
-    .demo-grid{ grid-template-columns:repeat(2,1fr); }
+    .demo-grid{ grid-template-columns:repeat(1,1fr); }
     .demo-card.tall{ grid-row:span 2; }
     .modal-hero{ height:220px; }
   }

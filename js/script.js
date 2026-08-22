@@ -1,46 +1,13 @@
-// /* =========================================================
-//    PT. Menara Sarana Tama — site interactions & animations
-//    Scroll reveal, animated counters, parallax hero, 3D tilt.
-//    All motion is skipped automatically if the visitor has
-//    "prefers-reduced-motion: reduce" set in their OS/browser.
-//    ========================================================= */
+/* =========================================================
+   PT. Menara Sarana Tama — site interactions & animations
+   Scroll reveal, animated counters, parallax hero, 3D tilt.
+   All motion is skipped automatically if the visitor has
+   "prefers-reduced-motion: reduce" set in their OS/browser.
+   ========================================================= */
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------------------------------------------------------
-      0. Humburger menu toggle
-     --------------------------------------------------------- */
-  //   document.addEventListener('DOMContentLoaded', function(){
-  //   const header = document.getElementById('siteHeader');
-  //   const toggle = document.getElementById('navToggle');
-  //   const backdrop = document.getElementById('navBackdrop');
-  //   const navClose = document.getElementById('navClose');
-  //   const links = document.querySelectorAll('#navLinks a');
-  
-  //   if(!header || !toggle || !backdrop){
-  //     console.error('Menu error: cek apakah id="siteHeader", id="navToggle", id="navBackdrop" sudah ada di HTML.');
-  //     return;
-  //   }
-  
-  //   function closeMenu(){
-  //     header.classList.remove('open');
-  //     toggle.setAttribute('aria-expanded', 'false');
-  //     toggle.setAttribute('aria-label', 'Buka menu');
-  //   }
-  //   function toggleMenu(){
-  //     const isOpen = header.classList.toggle('open');
-  //     toggle.setAttribute('aria-expanded', String(isOpen));
-  //     toggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
-  //   }
-  
-  //   toggle.addEventListener('click', toggleMenu);
-  //   if(navClose) navClose.addEventListener('click', closeMenu);
-  //   backdrop.addEventListener('click', closeMenu);
-  //   links.forEach(a => a.addEventListener('click', closeMenu));
-  //   window.addEventListener('resize', () => { if (window.innerWidth > 840) closeMenu(); });
-  // });
- 
   /* ---------------------------------------------------------
      1. Scroll reveal — fade + rise, staggered inside groups
      --------------------------------------------------------- */
@@ -125,16 +92,12 @@
       parallaxImg.style.transform = `translateY(${y * 0.12}px) scale(1.06)`;
       ticking = false;
     };
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(updateParallax);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   /* ---------------------------------------------------------
@@ -166,6 +129,41 @@
     const toggleHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
     toggleHeader();
     window.addEventListener('scroll', toggleHeader, { passive: true });
+  }
+
+  /* ---------------------------------------------------------
+     5b. Mobile nav — right-side drawer with backdrop
+     --------------------------------------------------------- */
+  const siteHeader = document.getElementById('siteHeader');
+  const navToggle = document.getElementById('navToggle');
+  const navClose = document.getElementById('navClose');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const navLinks = document.getElementById('navLinks');
+
+  if (siteHeader && navToggle && navBackdrop) {
+    const openNav = () => {
+      siteHeader.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeNav = () => {
+      siteHeader.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    navToggle.addEventListener('click', () => {
+      if (siteHeader.classList.contains('open')) closeNav();
+      else openNav();
+    });
+    if (navClose) navClose.addEventListener('click', closeNav);
+    navBackdrop.addEventListener('click', closeNav);
+    if (navLinks) navLinks.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeNav();
+    });
   }
 
   /* ---------------------------------------------------------
@@ -267,59 +265,4 @@
       if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
   }
-}};
-
-// Partners
-  // gandakan isi track supaya scroll infinite mulus
-  const track = document.getElementById('track');
-  track.innerHTML += track.innerHTML;
-// Partners
-
-// Layanan
-const backdrop = document.getElementById('modalBackdrop');
-  const heroImg = document.getElementById('modalHeroImg');
-  const thumbsWrap = document.getElementById('modalThumbs');
-  const idxEl = document.getElementById('modalIdx');
-  const titleEl = document.getElementById('modalTitle');
-  const descEl = document.getElementById('modalDesc');
- 
-  function openModal(card){
-    const images = card.dataset.images.split(',').map(s => s.trim());
-    idxEl.textContent = card.dataset.idx;
-    titleEl.innerHTML = card.dataset.title;
-    descEl.textContent = card.dataset.desc;
- 
-    heroImg.src = images[0];
-    heroImg.alt = card.dataset.title;
- 
-    thumbsWrap.innerHTML = '';
-    images.forEach((src, i) => {
-      const t = document.createElement('img');
-      t.src = src;
-      t.className = i === 0 ? 'active' : '';
-      t.addEventListener('click', () => {
-        heroImg.src = src;
-        thumbsWrap.querySelectorAll('img').forEach(x => x.classList.remove('active'));
-        t.classList.add('active');
-      });
-      thumbsWrap.appendChild(t);
-    });
- 
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
- 
-  function closeModal(){
-    backdrop.classList.remove('open');
-    document.body.style.overflow = '';
-  }
- 
-  document.querySelectorAll('.demo-card').forEach(card => {
-    card.addEventListener('click', () => openModal(card));
-  });
- 
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-  // Layanan
+});

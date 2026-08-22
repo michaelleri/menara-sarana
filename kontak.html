@@ -12,23 +12,29 @@
 </head>
 <body>
 
-<header>
+<header id="siteHeader">
   <div class="wrap">
     <nav>
-      <a class="logo" href="/menara-sarana/index.html#top" aria-label="PT Menara Sarana Tama, beranda">
+      <a class="logo" href="#top" aria-label="PT Menara Sarana Tama, beranda">
         <img class="logo-mark-img" src="images/logo-icon.png" alt="Logo PT Menara Sarana Tama">
         <span class="logo-text">Menara Sarana Tama<span>Genset &amp; Material Handling</span></span>
       </a>
-      <div class="nav-links">
-        <a href="/menara-sarana/index.html#profil">Profil</a>
-        <a href="/menara-sarana/index.html#layanan">Layanan</a>
-        <a href="/menara-sarana/index.html#proyek">Proyek</a>
-        <a href="/menara-sarana/index.htmlkontak.html">Kontak</a>
+ 
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Beranda</a>
+        <a href="about.html">About</a>
+        <a href="#kontak">Kontak</a>
+        <a class="btn btn-primary btn-mobile-only" href="https://wa.me/6281283904127?text=Halo%20MST%2C%20saya%20ingin%20menanyakan%20layanan%20genset" target="_blank" rel="noopener">Minta Penawaran</a>
       </div>
-      <a class="btn btn-primary" href="#kontak">Minta Penawaran</a>
+ 
+      <a class="btn btn-primary nav-cta-desktop" href="https://wa.me/6281283904127?text=Halo%20MST%2C%20saya%20ingin%20menanyakan%20layanan%20genset" target="_blank" rel="noopener">Minta Penawaran</a>
+ 
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false"><span></span></button>
     </nav>
   </div>
+  <div class="nav-backdrop" id="navBackdrop"></div>
 </header>
+
 
 <main id="top">
 
@@ -76,9 +82,47 @@
         <div class="logo" style="margin-bottom:14px;"><img class="logo-mark-img" src="images/logo-icon.png" alt="Logo PT Menara Sarana Tama"><span class="logo-text">Menara Sarana Tama</span></div>
         <p style="font-size:13px;color:var(--ink);max-width:280px;">General contractor mechanical, electrical, instalasi, control panel, repair &amp; overhaul genset.</p>
       </div>
-      <div><h4 style="color: var(--ink);font-weight: 800;">Navigasi</h4><ul><li><a href="/menara-sarana/index.html#profil">Profil</a></li><li><a href="/menara-sarana/index.html#layanan">Layanan</a></li><li><a href="/menara-sarana/index.html#proyek">Proyek</a></li><li><a href="/menara-sarana/index.html#kontak">Kontak</a></li></ul></div>
-      <div><h4 style="color: var(--ink);font-weight: 800;">Layanan</h4><ul><li>Instalasi Genset</li><li>Panel &amp; Control</li><li>Repair &amp; Overhaul</li><li>General Supplier</li></ul></div>
-      <div><h4 style="color: var(--ink);font-weight: 800;">Kontak</h4><ul><li><a href="tel:+622129477500">(021) 29477500</a></li><li><a href="https://wa.me/6281283904127?text=Halo%20MST%2C%20saya%20ingin%20menanyakan%20layanan%20genset" target="_blank" rel="noopener">0812-8390-4127 (WA)</a></li><li><a href="mailto:menarasaranatama@yahoo.com">menarasaranatama@yahoo.com</a></li></ul></div>
+      <div>
+        <h4 style="color: var(--ink);font-weight: 800;">Navigasi</h4>
+        <ul>
+          <li>
+            <a href="index.html">Beranda</a>
+          </li>
+          <li>
+            <a href="about.html">About</a>
+          </li>
+          <li>
+            <a href="#kontak">Kontak</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: var(--ink);font-weight: 800;">Layanan</h4>
+        <ul>
+          <li>Instalasi Genset</li>
+          <li>Panel &amp; Control</li>
+          <li>Repair &amp; Overhaul</li>
+          <li>General Supplier</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: var(--ink);font-weight: 800;">Kontak</h4>
+        <ul>
+          <li>
+            <a href="tel:+622129477500">(021) 29477500</a>
+          </li>
+          <li>
+            <a href="https://wa.me/6281283904127?text=Halo%20MST%2C%20saya%20ingin%20menanyakan%20layanan%20genset" target="_blank" rel="noopener">0812-8390-4127 (WA)</a>
+          </li>
+          <li>
+            <a href="mailto:menarasaranatama@yahoo.com">menarasaranatama@yahoo.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PT. Menara Sarana Tama. Seluruh hak cipta dilindungi.</span>
+      <span>Bekasi, Jawa Barat</span>
     </div>
     <div class="footer-bottom"><span>© 2026 PT. Menara Sarana Tama. Seluruh hak cipta dilindungi.</span><span>Bekasi, Jawa Barat</span></div>
   </div>
